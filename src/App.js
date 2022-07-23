@@ -17,10 +17,11 @@ function App() {
       <Header></Header>
       <Contents>
           <Routes>
-            <Route path="/" element={<PostingViewer/>}/>
+            <Route path="/" element={<PostingViewer isPersonal={false}/>}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/posting/add" element={<PostingInput/>}/>
+            <Route path="/mypage" element={<PostingViewer isPersonal={true}/>}></Route>
         </Routes>
         <Footer></Footer>
       </Contents>

@@ -10,6 +10,9 @@ const GlobalStyle = createGlobalStyle`
     h1 {
         margin:0;
     }
+    h2 {
+        margin:0;
+    }
 `
 
 export default GlobalStyle;
