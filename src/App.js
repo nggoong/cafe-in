@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from './components/header/Header';
+import Login from './components/user/Login';
+import SignUp from './components/user/SignUp';
 import GlobalStyle from './components/styled/GlobalStyle';
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -15,7 +18,10 @@ function App() {
       </Contents> */}
       <Header></Header>
       <Contents>
-          <h1>dafsfdasdf</h1>
+          <Routes>
+            <Route path="/login" element={<Login />}/>
+            <Route path="/signup" element={<SignUp />}/>
+          </Routes>
       </Contents>
 
     </div>
@@ -26,7 +32,7 @@ export default App;
 
 const Contents =styled.div`
   width:90%;
-  background:yellow;
+  // background:yellow;
   max-width:1000px;
   padding-top:60px;
   margin:0 auto;
