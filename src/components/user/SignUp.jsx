@@ -27,6 +27,14 @@ const SingupWrapper =styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom : 50px;
+
+    position:absolute;
+    z-index:100;
+    width:100vw;
+    height:100vh;
+    top:0;
+    left:0;
+    background:white;
 `
 
 const SignupBox =styled.div`

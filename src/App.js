@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import Header from './components/header/Header';
 import Login from './components/user/Login';
 import SignUp from './components/user/SignUp';
+import Footer from './components/header/Footer';
 import GlobalStyle from './components/styled/GlobalStyle';
 import { Routes, Route } from "react-router-dom";
 import PostingViewer from './components/posting/PostingViewer';
 import PostingInput from './components/posting/PostingInput';
+
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/posting/add" element={<PostingInput/>}/>
         </Routes>
+        <Footer></Footer>
       </Contents>
+
     </div>
   );
 }
