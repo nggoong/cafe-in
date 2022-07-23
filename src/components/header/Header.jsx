@@ -28,7 +28,7 @@ const HeaderContents = styled.div`
     background:blue;
     width:100%;
     height:100%;
-    max-width:1000px;
+    max-width:800px;
     margin:0 auto;
     h1 {
         margin:0;

@@ -5,25 +5,22 @@ import Login from './components/user/Login';
 import SignUp from './components/user/SignUp';
 import GlobalStyle from './components/styled/GlobalStyle';
 import { Routes, Route } from "react-router-dom";
+import PostingViewer from './components/posting/PostingViewer';
+import PostingInput from './components/posting/PostingInput';
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle/>
-      {/* <Header></Header> */}
-      {/* <Contents>
-        <Routes>
-          <Route element={<Home/>}></Route>
-        </Routes>
-      </Contents> */}
       <Header></Header>
       <Contents>
           <Routes>
+            <Route path="/" element={<PostingViewer/>}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/signup" element={<SignUp />}/>
-          </Routes>
+            <Route path="/posting/add" element={<PostingInput/>}/>
+        </Routes>
       </Contents>
-
     </div>
   );
 }
@@ -32,14 +29,9 @@ export default App;
 
 const Contents =styled.div`
   width:90%;
-  // background:yellow;
-  max-width:1000px;
+  max-width:800px;
   padding-top:60px;
   margin:0 auto;
-  h1 {
-    margin:0;
-    padding:0;
-  }
 `
 
 
