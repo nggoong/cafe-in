@@ -22,6 +22,7 @@ function App() {
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/posting/add" element={<PostingInput/>}/>
             <Route path="/mypage" element={<PostingViewer isPersonal={true}/>}></Route>
+            <Route path="/bookmark" element={<PostingViewer isPersonal={false}/>} />
         </Routes>
         <Footer></Footer>
       </Contents>

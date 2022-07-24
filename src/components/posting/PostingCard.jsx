@@ -25,6 +25,11 @@ const PostingCard = ({ isPersonal }) => {
                 <p onClick={toggleBookmark}>{!bookmark?<BsBookmark/>:<BsBookmarkFill style={{color:'yellow'}}/>}</p>
                 <p onClick={toggleLike}>{!like?<BsSuitHeart/>:<BsFillSuitHeartFill style={{color:'red'}}/>}</p>
             </ActionsArea>
+            <PostingContent>
+                <h2>스타벅스</h2>
+                <p>아이스티에 샷 추가 들어보셨나요 진짜 맛있어요 이게 뭔가 했었는데 진짜 맛있더라구요,,,</p>
+            </PostingContent>
+            
             <PersonalArea personal={isPersonal}>
                 <p className='delete-action'>DELETE</p>
                 <p className='edit-action'>EDIT</p>
@@ -64,21 +69,34 @@ const PostingImageDiv = styled.div`
     border-radius:10px;
     background:lightgray;
 `
-
+const PostingContent = styled.div`
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding-left:8px;
+    p {
+        line-height:1.5;
+    }
+`
 const ActionsArea = styled.div`
     display:${props => props.personal === false? 'flex':'none'};
-    justify-content:flex-end;
-    gap:20px;
+    justify-content:flex-start;
+    padding-left:8px;
+    margin-bottom:-10px;
+    gap:15px;
     width:100%;
-    font-size:35px;
+    font-size:25px;
     p {
         cursor:pointer;
     }
 `
 const PersonalArea = styled(ActionsArea)`
     display:${props => props.personal === true? 'flex':'none'};
+    justify-content:flex-end;
     font-size:15px;
     font-weight:bold;
+    margin-bottom:1px;
     .delete-action {
         color:red;
     }

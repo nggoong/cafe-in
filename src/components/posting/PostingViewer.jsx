@@ -11,6 +11,7 @@ const PostingViewer = ({ isPersonal }) => {
             <PostingCard isPersonal={isPersonal}></PostingCard>
             <PostingCard isPersonal={isPersonal}></PostingCard>
             <PostingCard isPersonal={isPersonal}></PostingCard>
+            <PostingCard isPersonal={isPersonal}></PostingCard>
         </PostingViewerWrapper>
     )
 }
@@ -22,5 +23,6 @@ const PostingViewerWrapper = styled.div`
     flex-direction:column;
     gap:20px;
     width:100%;
-    height:100px;
+    /* height:90vh; */
+    margin-bottom:60px;
 `
