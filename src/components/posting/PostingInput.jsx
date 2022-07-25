@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { BsFillCameraFill } from 'react-icons/bs';
+import instance from '../../shared/axios'
 
 const PostingInput = () => {
     const textAreaRef = useRef(null);
@@ -26,6 +27,17 @@ const PostingInput = () => {
 
     const selectCafeName = (e) => {
         setCafeState(e.target.value);
+    }
+
+    const submitHandler = () => {
+        // id가 user_email인지?
+        // user의 nickname도 있으면 좋을거같은데,,,
+        const new_data = {
+            cafe_name:cafeState,
+            content:textAreaRef.current.value,
+            img:imageState,
+        }
+        instance.post('/api/post', new_data);
     }
 
     
@@ -57,8 +69,8 @@ const PostingInput = () => {
                 
             </InputsArea>
             <ButtonArea>
-                <Button color="primary" onClick={()=>alert(`${textAreaRef.current.value}`)}>확인</Button>
-                <Button color="error" onClick={()=> navigate(-1)}>취소</Button>
+                <Button color="primary" onClick={submitHandler}>확인</Button>
+                <Button color="error" onClick={() => navigate(-1)}>취소</Button>
             </ButtonArea>
         </InputWrapper>
     )

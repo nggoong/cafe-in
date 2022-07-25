@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import instance from '../../shared/axios';
 import { BsBookmark, BsBookmarkFill, BsSuitHeart, BsFillSuitHeartFill } from 'react-icons/bs';
+
 
 const PostingCard = ({ isPersonal }) => {
     const [bookmark, setBookmark] = useState(false);
@@ -11,6 +13,15 @@ const PostingCard = ({ isPersonal }) => {
     }
     const toggleLike = () => {
         setLike((like) => !like);
+    }
+
+    const axiostest = async() => {
+        const res = await instance.post('/user/signup', []).catch((e)=> {
+            console.log(e);
+        })
+
+        const data = res.data;
+        return data;
     }
 
     return(
@@ -31,7 +42,7 @@ const PostingCard = ({ isPersonal }) => {
             </PostingContent>
             
             <PersonalArea personal={isPersonal}>
-                <p className='delete-action'>DELETE</p>
+                <p className='delete-action' onClick={axiostest}>DELETE</p>
                 <p className='edit-action'>EDIT</p>
             </PersonalArea>
         </PostingCardWrapper>
