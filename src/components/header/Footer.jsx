@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { BsPencil, BsBookmarks, BsInboxes } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
 
+    if (window.location.pathname === '/')  return null;
+    if (window.location.pathname === '/login')  return null;
+    if (window.location.pathname === '/signup')  return null;
 
     return (
         <FooterWrapper>

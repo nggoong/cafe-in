@@ -5,6 +5,10 @@ import { FaUserCircle } from 'react-icons/fa';
 
 const Header = () => {
 
+    if (window.location.pathname === '/')  return null;
+    if (window.location.pathname === '/login')  return null;
+    if (window.location.pathname === '/signup')  return null;
+
     return (
         <HeaderWrapper>
             <HeaderContents>

@@ -5,13 +5,35 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
 
+    const email_ref = React.useRef(null);
+    const pw_ref = React.useRef(null);
+
+    const submitLogin = () => {
+        const login_data = {
+            email : email_ref.current.value,
+            password : pw_ref.current.value
+        }
+        console.log(login_data)
+
+        if (email_ref.current.value === '') {
+            alert ('아이디를 입력하세요!')
+        } else if (pw_ref.current.value === '') {
+            alert ('비밀번호를 입력하세요!')
+        }
+
+        //아이디 형식이 맞지 않을 경우 :
+        //서버의 아이디와 일치하지 않을 경우 : 
+        //서버의 비밀번호와 일치하지 않을 경우 :
+        //로그인 성공시-> main 페이지로 이동
+    }
+
     return (
         <LoginWrapper>
             <h2 className='title'>login</h2>
             <LoginBox>
-                <input type='email' placeholder="아이디"/>< br/>
-                <input type="password" placeholder="비밀번호"/>< br/>
-                <button> 로그인 </button>
+                <input ref={email_ref} type='email' placeholder="아이디"/>< br/>
+                <input ref={pw_ref} type="password" placeholder="비밀번호"/>< br/>
+                <button onClick={submitLogin}> 로그인 </button>
             </LoginBox>
 
             <LinkBox>
@@ -28,15 +50,14 @@ const LoginWrapper =styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom : 50px;
-    
-    position:absolute;
-    z-index:100;
-    width:100vw;
-    height:100vh;
-    top:0;
-    left:0;
     background:white;
+
+    // position:absolute;
+    // z-index:100;
+    // width:100vw;
+    // height:100vh;
+    // top:0;
+    // left:0;
     
 `
 
@@ -78,13 +99,17 @@ const LoginBox =styled.div`
         background-color: #555;
         color : white;
         font-weight : bold;
+
+        :active {
+            transform : translateY(6px);
+        }
+    
     }
 
 `
 
 const LinkBox =styled.div`
     padding-top : 45px;
-
 
     a {
         color : black;
@@ -99,11 +124,11 @@ const LinkBox =styled.div`
         }
       }
 
-      @media only screen and (max-width: 600px) {
-        span {
-            font-weight: bold;
-            text-decoration: underline;
-        }
-      }
+    @media only screen and (max-width: 600px) {
+    span {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    }
 
 `

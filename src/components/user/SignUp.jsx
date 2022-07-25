@@ -3,18 +3,44 @@ import styled from 'styled-components';
 
 const SignUp = () => {
 
+    const email_ref = React.useRef(null);
+    const pw_ref = React.useRef(null);
+    const nickname_ref = React.useRef(null);
+
+    const submitJoin = () => {
+        const user_data = {
+            email : email_ref.current.value,
+            nickname : nickname_ref.current.value,
+            password : pw_ref.current.value
+        }
+
+        if (email_ref.current.value === '') {
+            alert ('아이디를 입력하세요!')
+        } else if (nickname_ref.current.value === '') {
+            alert ('닉네임을 입력하세요!')
+        } else if (pw_ref.current.value === '') {
+            alert ('비밀번호를 입력하세요!')
+        }
+
+        console.log(user_data)
+
+        //아이디 형식이 맞지 않을 경우 :
+        //닉네임 형식이 맞지 않을 경우??
+        //비밀번호 형식이 맞지 않을 경우
+        //비밀번호&&비밀번호 확인 input이 같지 않으면?
+        //회원가입 성공시-> 서버로 보내고 알럿띄우고 login 페이지로 이동
+    }
+
     return (
         <SingupWrapper>
             <h2>Join</h2>
             <SignupBox>
-            <p>아이디</p><input placeholder="아이디를 입력하세요"/>< br/>
-            <p>닉네임</p><input placeholder="닉네임을 입력하세요"/>< br/>
-            <p>비밀번호</p><input type="password" placeholder="비밀번호를 입력하세요"/>< br/>
+            <p>아이디</p><input ref={email_ref} placeholder="아이디를 입력하세요"/>< br/>
+            <p>닉네임</p><input ref={nickname_ref} placeholder="닉네임을 입력하세요"/>< br/>
+            <p>비밀번호</p><input ref={pw_ref} type="password" placeholder="비밀번호를 입력하세요"/>< br/>
             <p>비밀번호 확인</p><input type="password" placeholder="비밀번호를 다시 입력하세요"/>< br/>
-            <button>회원가입</button>
+            <button onClick={submitJoin}>회원가입</button>
             </SignupBox>
-
-        
         </SingupWrapper>
     )
 }
@@ -26,15 +52,14 @@ const SingupWrapper =styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom : 50px;
-
-    position:absolute;
-    z-index:100;
-    width:100vw;
-    height:100vh;
-    top:0;
-    left:0;
     background:white;
+
+    // position:absolute;
+    // z-index:100;
+    // width:100vw;
+    // height:100vh;
+    // top:0;
+    // left:0;
 `
 
 const SignupBox =styled.div`
@@ -55,7 +80,6 @@ const SignupBox =styled.div`
         margin-top : 5px;
         border : none;
         border-bottom : 1px solid;
-        // border-radius : 3px;
         width: 250px;
 
         &:hover{  
@@ -81,6 +105,11 @@ const SignupBox =styled.div`
         background-color: #555;
         color : white;
         font-weight : bold;
+
+        :active {
+            transform : translateY(6px);
+        }
+    
     }
 
 `
