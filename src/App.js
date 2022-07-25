@@ -19,7 +19,7 @@ function App() {
       <Contents>
           <Routes>
             <Route path="/" element={<Intro />}/>
-            <Route path="/main" element={<PostingViewer />}/>
+            <Route path="/main" element={<PostingViewer isPersonal={false}/>}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/posting/add" element={<PostingInput/>}/>

@@ -27,8 +27,10 @@ const HeaderWrapper = styled.div`
     left:0;
     width:100%;
     height:50px;
-    border-bottom:2px solid lightgray;
-    background:white;
+    // border-bottom:2px solid lightgray;
+    border-bottom : 1px solid lightgray;
+
+    background:#FEFEFE;
     
 `
 
@@ -45,7 +47,7 @@ const HeaderContents = styled.div`
     h1 {
         margin:0;
         padding:0;
-        color:black;
+        color:#8AAAE5;
     }
     a {
         text-decoration:none;

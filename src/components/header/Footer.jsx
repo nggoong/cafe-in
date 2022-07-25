@@ -44,6 +44,7 @@ const FooterWrapper = styled.div`
     width:100%;
     height:50px;
     background:white;
+    border-top : 1px solid lightgray;
     
     display:flex;
     z-index:10;
@@ -73,7 +74,7 @@ const FooterContents = styled.div`
     }
 
     a {
-        color : black;
+        color : #8AAAE5;
         // text-decoration:none;
     }
 
