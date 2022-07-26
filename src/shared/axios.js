@@ -15,7 +15,7 @@ instance.interceptors.request.use((config) => {
     }
     else {
         config.headers.common['access_token'] = `Bearer ${access_token}`;
-        return config
+        return config;
     }
 })
 

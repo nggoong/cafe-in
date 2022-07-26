@@ -1,36 +1,43 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { BsPencil, BsBookmarks, BsInboxes } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+    const wrapperRef = useRef(null);
 
     if (window.location.pathname === '/')  return null;
-    if (window.location.pathname === '/login')  return null;
-    if (window.location.pathname === '/signup')  return null;
+    else if (window.location.pathname === '/login')  return null;
+    else if (window.location.pathname === '/signup')  return null;
 
-    return (
-        <FooterWrapper>
-            <FooterContents>
-                {/* 내가 쓴 글 보기 페이지로 이동하는 버튼 */}
-                <Link to='/mypage'>
-                        <BsInboxes />
-                </Link>
+    
 
-                {/* 북마크 페이지로 이동하는 버튼 */}
-                <Link to='/bookmark'>
-                        <BsBookmarks />
-                </Link>
+    else {
+        return (
+            <FooterWrapper ref={wrapperRef}>
+                <FooterContents>
+                    {/* 내가 쓴 글 보기 페이지로 이동하는 버튼 */}
+                    <Link to='/mypage' >
+                            <BsInboxes/>
+                    </Link>
+    
+                    {/* 북마크 페이지로 이동하는 버튼 */}
+                    <Link to='/bookmark'>
+                            <BsBookmarks />
+                    </Link>
+    
+                    {/* 글 작성 페이지로 이동하는 버튼 */}
+                    <Link to='/posting/add'>
+                            <BsPencil />
+                    </Link>
+    
+    
+                </FooterContents>
+            </FooterWrapper>
+        )
+    }
 
-                {/* 글 작성 페이지로 이동하는 버튼 */}
-                <Link to='/posting/add'>
-                        <BsPencil />
-                </Link>
-
-
-            </FooterContents>
-        </FooterWrapper>
-    )
+    
 }
 
 

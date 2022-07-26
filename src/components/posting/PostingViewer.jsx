@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PostingCard from './PostingCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { postingActions, fetchPostingsFirst, fetchPersonalPostingsFirst, fetchBookmarkPostingsFirst } from '../../redux/module/postingReducer';
 
-const PostingViewer = ({ isPersonal }) => {
+const PostingViewer = ({ isPersonal, target }) => {
+    // console.log('hello');
+    const dispatch = useDispatch();
+    const postingData = useSelector(state => state.posting.postings);
 
+    useEffect(()=> {
+        if(target === 'main') {
+            dispatch(fetchPostingsFirst());
+        }
+        else if(target === 'mypage') {
+            dispatch(fetchPersonalPostingsFirst());
+        }
+        else if(target === 'bookmark') {
+            dispatch(fetchBookmarkPostingsFirst());
+        }
+    }, [target])
 
     return(
         <PostingViewerWrapper>
-            <PostingCard isPersonal={isPersonal}></PostingCard>
-            <PostingCard isPersonal={isPersonal}></PostingCard>
-            <PostingCard isPersonal={isPersonal}></PostingCard>
-            <PostingCard isPersonal={isPersonal}></PostingCard>
-            <PostingCard isPersonal={isPersonal}></PostingCard>
+            {postingData.map((posting, index) => <PostingCard posting={posting} key={posting.id} isPersonal={isPersonal}/>)}
         </PostingViewerWrapper>
     )
 }

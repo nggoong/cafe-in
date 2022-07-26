@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import instance from '../../shared/axios';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill, BsSuitHeart, BsFillSuitHeartFill } from 'react-icons/bs';
+import { deletePersonalPosting } from '../../redux/module/postingReducer';
+
+const createAtcut = (created_at) => {
+    return created_at.slice(0,10)
+}
 
 
-const PostingCard = ({ isPersonal }) => {
-    const [bookmark, setBookmark] = useState(false);
+const PostingCard = ({ isPersonal, posting }) => {
+    // 북마크 부분 백앤드에서 어떻게 줄지 모르니까 나중에 바꾸기 꼭.
+    const [bookmark, setBookmark] = useState(()=>(posting.bookmark === true?true:false));
     const [like, setLike] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const toggleBookmark = () => {
         setBookmark((bookmark)=> !bookmark);
@@ -15,34 +24,31 @@ const PostingCard = ({ isPersonal }) => {
         setLike((like) => !like);
     }
 
-    const axiostest = async() => {
-        const res = await instance.post('/user/signup', []).catch((e)=> {
-            console.log(e);
-        })
 
-        const data = res.data;
-        return data;
+    const deleteHandler = async () => {
+        await dispatch(deletePersonalPosting({id:posting.id}));
+        window.location.replace('/mypage');
     }
 
     return(
         <PostingCardWrapper>
             <PostingHeader>
-                <h2>nickname</h2>
+                <h2>{posting.nickname}</h2>
+                <p>{createAtcut(posting.created_at)}</p>
             </PostingHeader>
-            <PostingImageDiv>
-                <h2>No Image</h2>
+            <PostingImageDiv style={{backgroundImage:`url(${posting.filePath})`}}>
             </PostingImageDiv>
             <ActionsArea personal={isPersonal}>
                 <p onClick={toggleBookmark}>{!bookmark?<BsBookmark/>:<BsBookmarkFill style={{color:'yellow'}}/>}</p>
                 <p onClick={toggleLike}>{!like?<BsSuitHeart/>:<BsFillSuitHeartFill style={{color:'red'}}/>}</p>
             </ActionsArea>
             <PostingContent>
-                <h2>스타벅스</h2>
-                <p>아이스티에 샷 추가 들어보셨나요 진짜 맛있어요 이게 뭔가 했었는데 진짜 맛있더라구요,,,</p>
+                <h2>{posting.cafeName}</h2>
+                <p>{posting.content}</p>
             </PostingContent>
             
             <PersonalArea personal={isPersonal}>
-                <p className='delete-action' onClick={axiostest}>DELETE</p>
+                <p className='delete-action' onClick={deleteHandler}>DELETE</p>
                 <p className='edit-action'>EDIT</p>
             </PersonalArea>
         </PostingCardWrapper>
@@ -63,10 +69,14 @@ const PostingCardWrapper = styled.div`
     border:2px solid lightgray;
 `
 const PostingHeader = styled.div`
-    width:100%;
-    padding:0 10px;
+    display:flex;
+    padding-right:10px;
+    padding-left:10px;
+    justify-content:center;
+    align-items: center;
     h2 {
         font-size:17px;
+        flex:1;
     }
 `
 const PostingImageDiv = styled.div`
@@ -79,14 +89,19 @@ const PostingImageDiv = styled.div`
     background:blue;
     border-radius:10px;
     background:lightgray;
+    background-position:center;
+    background-size:100% 35vh;
 `
 const PostingContent = styled.div`
-    width:100%;
     display:flex;
     flex-direction:column;
     gap:5px;
     padding-left:8px;
+    padding-right:8px;
+
     p {
+        display: block;
+        width:100%;
         line-height:1.5;
     }
 `

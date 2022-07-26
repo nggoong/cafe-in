@@ -32,12 +32,17 @@ const PostingInput = () => {
     const submitHandler = () => {
         // id가 user_email인지?
         // user의 nickname도 있으면 좋을거같은데,,,
-        const new_data = {
-            cafe_name:cafeState,
-            content:textAreaRef.current.value,
-            img:imageState,
-        }
-        instance.post('/api/post', new_data);
+        let formData = new FormData();
+        formData.append("data", {cafe_name:cafeState, content:textAreaRef.current.value});
+        formData.append("img", imageState);
+        console.log(formData);
+        // const new_data = {
+        //     cafe_name:cafeState,
+        //     content:textAreaRef.current.value,
+        //     img:imageState,
+        // }
+        // instance.post('/api/post', formData);
+        navigate('/mypage');
     }
 
     

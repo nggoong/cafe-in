@@ -9,22 +9,24 @@ import GlobalStyle from './components/styled/GlobalStyle';
 import { Routes, Route } from "react-router-dom";
 import PostingViewer from './components/posting/PostingViewer';
 import PostingInput from './components/posting/PostingInput';
+import Loading from './components/loading/Loading'
 
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle/>
+      <Loading/>
       <Header></Header>
       <Contents>
           <Routes>
             <Route path="/" element={<Intro />}/>
-            <Route path="/main" element={<PostingViewer isPersonal={false}/>}/>
+            <Route path="/main" element={<PostingViewer isPersonal={false} target={'main'}/>}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/posting/add" element={<PostingInput/>}/>
-            <Route path="/mypage" element={<PostingViewer isPersonal={true}/>}/>
-            <Route path="/bookmark" element={<PostingViewer isPersonal={false}/>}/>
+            <Route path="/mypage" element={<PostingViewer isPersonal={true} target={'mypage'}/>}/>
+            <Route path="/bookmark" element={<PostingViewer isPersonal={false} target={'bookmark'}/> }/>
         </Routes>
         <Footer></Footer>
       </Contents>
