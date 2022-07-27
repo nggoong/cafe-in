@@ -20,6 +20,10 @@ const PostingViewer = ({ isPersonal, target }) => {
         }
     }, [target])
 
+    // useEffect(()=> {
+    //     console.log(postingData);
+    // }, [postingData])
+
     return(
         <PostingViewerWrapper>
             {postingData.map((posting, index) => <PostingCard posting={posting} key={posting.id} isPersonal={isPersonal}/>)}

@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import instance from '../../shared/axios';
-import axios from 'axios';
-
-
-import { createUser as loginUser } from '../../redux/module/userReducer';
+import { userActions, loginUser } from '../../redux/module/userReducer';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 
 const Login = () => {
-    
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const email_ref = React.useRef(null);
@@ -35,7 +32,7 @@ const Login = () => {
         // });
 
         dispatch(loginUser({login_data : login_data}))
-        console.log(login_data)
+        navigate('/main');
 
     }
 

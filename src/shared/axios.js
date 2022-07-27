@@ -7,14 +7,16 @@ const instance = axios.create({
 
 
 instance.interceptors.request.use((config) => {
-    const access_token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('Authorization');
 
-    if(!access_token) {
-        config.headers.common['access_token'] = null;
+    if(!token) {
+        console.log(token);
+        config.headers.common['Authorization'] = null;
         return config;
     }
     else {
-        config.headers.common['access_token'] = `Bearer ${access_token}`;
+        console.log(token);
+        config.headers.common['Authorization'] = `${token}`;
         return config;
     }
 })

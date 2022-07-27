@@ -4,40 +4,43 @@ import axios from 'axios';
 
 
 //회원가입
-export const adduser = createAsyncThunk('addUser/addUser', async (information) => {
+export const addUser = createAsyncThunk('user/addUser', async (information) => {
 //createAsyncThunk는 비동기로 처리하는 인자는 1개만 가능
-    const res = await axios.post("http://localhost:5001/user_data",information.user_data);
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/signup`,information.user_data);
     const data = res.data;
+    console.log(res);
+    console.log(data);
     if (data.status === true) {
         alert ("회원가입 성공")
     } else {
         alert ("회원가입 실패")
     }
-    return data;
     // console.log(res);
 })
 
 
 //로그인
-export const loginuser = createAsyncThunk('loginUser/loginUser', async (information) => {
-        const res = await axios.post("http://localhost:5001/user_data",information.login_data);
-        const data = res.data;
-        if (data.token !== undefined) {
-            localStorage.setItem("access_token", data.token);
-            localStorage.setItem(" ", data.nickname);
-            //닉네임은 어떻게ㅠㅠ?? 따로 받아와도 되는지,,? 헤더 컴포넌트에서 useSelector 써서?
-        } else {
-            alert ("아이디 또는 패스워드를 확인해주세요!")
-        }
-        return data;
+export const loginUser = createAsyncThunk('user/loginUser', async (information) => {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/login`,information.login_data);
+        const token = res.headers.authorization;
+        console.log(res);
+        localStorage.setItem("Authorization", token);
+        // if (data.token !== undefined) {
+        //     localStorage.setItem("access_token", data.token);
+        //     localStorage.setItem(" ", data.nickname);
+        //     //닉네임은 어떻게ㅠㅠ?? 따로 받아와도 되는지,,? 헤더 컴포넌트에서 useSelector 써서?
+        // } else {
+        //     alert ("아이디 또는 패스워드를 확인해주세요!")
+        // }
+        // return data
     })
 
 
 const userSlice = createSlice({
     name : "user",
     initialState : {
-        email : "dyhh12@naver.com",
-        nickname : "달구",
+        email : "",
+        nickname : "",
     },
     reducers : {
         createUser : (state,action) => {
@@ -46,10 +49,10 @@ const userSlice = createSlice({
             state.password = action.password;
         },
 
-        loginUser : (state,action) => {
-            state.login_list.push(action.login_data)
-            console.log(state.login_list);
-        },
+        // loginUser : (state,action) => {
+        //     state.login_list.push(action.login_data)
+        //     console.log(state.login_list);
+        // },
     },
     // extraReducers :
     // 미들웨어 넣는 곳
@@ -62,5 +65,7 @@ const userSlice = createSlice({
     // }
 });
 
-export const {createUser, addUser, loginUser} = userSlice.actions;
+// export const {createUser, , loginUser} = userSlice.actions;
+const userActions = userSlice.actions;
+export { userActions };
 export default userSlice.reducer;
