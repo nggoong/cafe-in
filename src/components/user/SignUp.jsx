@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom"; 
+import { addUser } from '../../redux/module/userReducer';
+import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     //ref로 input값 받아오기
@@ -76,13 +79,6 @@ const SignUp = () => {
    
     const submitJoin = () => {
 
-        //보내줄 데이터 모아서 변수에 담기!
-        const user_data = {
-            email : email_ref.current.value,
-            nickname : nickname_ref.current.value,
-            password : pw_ref.current.value,
-        }
-
         //input 값에 공란이 있으면 알럿 띄우기
         if (email_ref.current.value === '') {
             alert ('아이디를 입력하세요!')
@@ -98,8 +94,15 @@ const SignUp = () => {
         //회원가입 성공시 db는 서버로 보내고 알럿띄우고 login 페이지로 이동
         if (emailcheck && nickNameCheck && pwcheck && pwrecheck === true) {
 
-            //db 서버로 보내기
-            
+            //보내줄 데이터 모아서 변수에 담기!
+            const user_data = {
+                email : email_ref.current.value,
+                nickname : nickname_ref.current.value,
+                password : pw_ref.current.value,
+            }
+            //리덕스의 addUser 함수를 이용해서 
+            dispatch(addUser({user_data : user_data}))
+
             alert('가입을 축하드려요!')
             navigate('/login');
         }

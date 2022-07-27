@@ -2,31 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
+import { createUser as loginUser } from '../../redux/module/userReducer';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+
 
 const Login = () => {
+    
+    const dispatch = useDispatch();
 
     const email_ref = React.useRef(null);
     const pw_ref = React.useRef(null);
 
     const submitLogin = () => {
-        const login_data = {
-            email : email_ref.current.value,
-            password : pw_ref.current.value
-        }
-        console.log(login_data)
-
+        //공란이면 알럿 띄우기
         if (email_ref.current.value === '') {
             alert ('아이디를 입력하세요!')
         } else if (pw_ref.current.value === '') {
             alert ('비밀번호를 입력하세요!')
         }
 
-        
+        const login_data = {
+            email : email_ref.current.value,
+            password : pw_ref.current.value
+        }
 
-        //아이디 형식이 맞지 않을 경우 :
-        //서버의 아이디와 일치하지 않을 경우 : 
-        //서버의 비밀번호와 일치하지 않을 경우 :
-        //로그인 성공시-> main 페이지로 이동
+        // axios.post("http://localhost:5001/user_data",{login_data}).then((res) => {
+        //     console.log(res);
+        // });
+
+        dispatch(loginUser({login_data : login_data}))
+        console.log(login_data)
+
     }
 
     return (

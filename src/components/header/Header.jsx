@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
+import logo from '../image/logo.png';
 
 const Header = () => {
 
@@ -12,7 +13,7 @@ const Header = () => {
     return (
         <HeaderWrapper>
             <HeaderContents>
-                <Link to="/" className='header-logo'><h1>logo</h1></Link>
+            <img src={logo} alt="intro" /><Link to="/" className='header-logo'><h1>카페In</h1></Link>
                 <Actionsarea><div className='user-info-div'><FaUserCircle/><span>nickname</span></div></Actionsarea>
             </HeaderContents>
         </HeaderWrapper>
