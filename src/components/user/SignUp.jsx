@@ -207,7 +207,9 @@ const SignupBox =styled.div`
         font-weight : bold;
 
         :active {
-            transform : translateY(6px);
+            transform : translateY(3px);
+            //모바일에서 버튼이 잘 안 눌리는 현상 때문에 움직이는 px을 줄였습니다.
+            //제꺼에선 잘 넘어가는데 움직이는 px이 커서 렉이 걸리는 게 아닌가 싶습니다.
         }
     
     }

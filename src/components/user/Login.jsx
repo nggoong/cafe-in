@@ -32,8 +32,13 @@ const Login = () => {
         // });
 
         dispatch(loginUser({login_data : login_data}))
-        navigate('/main');
 
+        //비밀번호가 틀리면 로그인 페이지 리로드 필요
+        try {
+
+        } catch (err) {
+
+        }
     }
 
     return (
@@ -110,7 +115,7 @@ const LoginBox =styled.div`
         font-weight : bold;
 
         :active {
-            transform : translateY(6px);
+            transform : translateY(3px);
         }
     
     }
