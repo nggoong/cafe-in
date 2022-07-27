@@ -62,10 +62,11 @@ const FooterWrapper = styled.div`
 
 const FooterContents = styled.div`
     background: white;
-    width:45vw;
+    width:70vw;
     height:100%;
     max-width:800px;
     margin:0 auto;
+    padding-top: 5px;
 
     cursor: pointer;
 
@@ -78,14 +79,9 @@ const FooterContents = styled.div`
     a:active {
         transform : translateY(4px);
     }
-    h1 {
-        margin:0;
-        padding:0;
-    }
-
+   
     a {
-        color : #8AAAE5;
-        // text-decoration:none;
+        color : #555;
     }
 
     @media only screen and (max-width: 600px) {
@@ -96,7 +92,7 @@ const FooterContents = styled.div`
     
     @media (min-width: 500px) {
         a:hover {
-            color: #555;
+            color: #8AAAE5;
         }
 
 

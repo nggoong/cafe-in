@@ -132,7 +132,7 @@ const SignUp = () => {
             <p>비밀번호</p>
             <input 
                 type="password"
-                placeholder="영문 8-20자, 특수문자(!@#$%^&.*) 포함 "
+                placeholder="영문 8-20자, 특수문자(!@#$%^&.*)포함 "
                 ref={pw_ref}
                 onBlur={pwCheck}
                 />< br/>
@@ -162,6 +162,9 @@ const SingupWrapper =styled.div`
     align-items: center;
     background:white;
 
+    width: 100%;
+    height: 80vh;
+
 `
 
 const SignupBox =styled.div`
@@ -170,19 +173,18 @@ const SignupBox =styled.div`
 
     p {
         text-align: left;
-        font-size : small;
-        font-weight : bold;
-        margin-top :10px;
+        margin-top :20px;
     }
 
     input {
-        padding: 15px;
+        padding: 5px;
         padding-bottom : 5px;
         margin-bottom : 0px;
         margin-top : 5px;
         border : none;
         border-bottom : 1px solid;
         width: 250px;
+        font-size : 20px;
 
         &:hover{  
             background-color : #EEE;
@@ -192,7 +194,7 @@ const SignupBox =styled.div`
             outline : none;
         }
         ::placeholder{
-            font-size : 12px;
+            font-size : 15px;
         }
     }
 
@@ -204,7 +206,7 @@ const SignupBox =styled.div`
         border-radius : 3px;
         background-color: #555;
         color : white;
-        font-weight : bold;
+        font-size : 15px;
 
         :active {
             transform : translateY(3px);
@@ -225,8 +227,7 @@ const None = styled.div `
 const Fail = styled.div `
     p {
         margin-top : 5px;
-        font-size : 12px;
-        // font-weight : lighter;
+        font-size : 13px;
         padding-bottom : 15px;
         padding-left : 10px;
     }
@@ -237,10 +238,9 @@ const Fail = styled.div `
 const Success = styled.div `
     p {
         margin-top : 5px;
-        font-size : 12px;
-        // font-weight : lighter;
+        font-size : 13px;
         padding-bottom : 15px;
         padding-left : 10px;
     }
-    color : #34b534;
+    color : #8AAAE5;
     `

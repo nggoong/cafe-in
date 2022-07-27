@@ -14,7 +14,10 @@ const Login = () => {
     const email_ref = React.useRef(null);
     const pw_ref = React.useRef(null);
 
+
     const submitLogin = async () => {
+   
+
         //공란이면 알럿 띄우기
         if (email_ref.current.value === '') {
             alert ('아이디를 입력하세요!')
@@ -57,13 +60,9 @@ const LoginWrapper =styled.div`
     align-items: center;
     background:white;
 
-    // position:absolute;
-    // z-index:100;
-    // width:100vw;
-    // height:100vh;
-    // top:0;
-    // left:0;
-    
+    width: 100%;
+    height: 80vh;
+
 `
 
 const LoginBox =styled.div`
@@ -78,8 +77,8 @@ const LoginBox =styled.div`
         margin-top : 5px;
         border : none;
         border-bottom : 1px solid;
-        // border-radius : 3px;
         width: 250px;
+        font-size : 20px;
 
         &:hover{  
             background-color : #EEE;
@@ -91,7 +90,7 @@ const LoginBox =styled.div`
         }
 
         ::placeholder{
-            font-size : 12px;
+            font-size : 18px;
         }
     }
 
@@ -103,7 +102,7 @@ const LoginBox =styled.div`
         border-radius : 3px;
         background-color: #555;
         color : white;
-        font-weight : bold;
+        font-size : 15px;
 
         :active {
             transform : translateY(3px);
@@ -123,15 +122,15 @@ const LinkBox =styled.div`
 
     @media (min-width: 500px) {
         a:hover {
-          color: black;
-          font-weight : bold;
+            span {
+                color: #8AAAE5;
+            }
           text-decoration: none;
         }
       }
 
     @media only screen and (max-width: 600px) {
     span {
-        font-weight: bold;
         text-decoration: underline;
     }
     }

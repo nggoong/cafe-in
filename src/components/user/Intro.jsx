@@ -10,12 +10,13 @@ const Intro = () => {
         <IntroWrapper>
 
                 <Titlearea>
-                    <h1>카페<span>In</span></h1>
+                    <h1>카페<span>in</span></h1>
                     <hr />
                 </Titlearea>
                 <Bodyarea>
                     <img src={intro} alt="intro" />
-                    <p> 어떤 것이든 좋아요! <br /> 당신만의 비밀 레시피를 알려주세요! </p>
+                    <p>당신만의</p>
+                    <p><span>비밀 레시피</span>를 알려주세요!</p>
                 <Arrow><p>↓</p></Arrow><br />
                 <Link to='/login'><button>login</button></Link>
                 </Bodyarea>
@@ -41,15 +42,15 @@ const IntroWrapper =styled.div`
     button {
     background-color : #555;
     color : #FEFEFE;
-    margin-top : 15px;
     border : none;
     padding : 15px;
+    padding-bottom : 12px;
     width : 120px;
     font-size : 15px;
     border-radius : 3px;
 
     :active {
-        transform : translateY(6px);
+        transform : translateY(3px);
     }
 
 
@@ -58,9 +59,9 @@ const IntroWrapper =styled.div`
 const Titlearea =styled.div`
     h1 {
         color : #555;
-        font-size : 3rem;
-        margin-bottom : 30px;
-
+        font-size : 3.5rem;
+        margin-top : 10px;
+        font-family: 'JGaegujaengyi-Bold-KO';
     }
 
     span {
@@ -82,10 +83,6 @@ const Titlearea =styled.div`
             100% {opacity:1;}
     }
 
-    hr {
-        width : 250px;
-        border : 2px solid #979ba1;
-    }
 `
 
 const Bodyarea =styled.div`
@@ -106,15 +103,17 @@ const Bodyarea =styled.div`
 
     }
     p {
-        margin : 15px;
-        font-size : 12px;
-        font-weight : bold;
+        margin : 10px;
+        font-size : 18px;
     }
 
+    span {
+        color : #3f51b5;
+    }
 `
 
 const Arrow = styled.div`
 p {
-    font-size: 30px;
+    font-size: 25px;
 }
 `

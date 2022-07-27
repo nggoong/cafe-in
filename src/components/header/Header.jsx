@@ -26,10 +26,16 @@ const Header = () => {
             <HeaderContents>
             <Logoarea onClick={() => {
                         navigate("/");
+
                     }}>
-                    <img src={logo} alt="intro" /><h1>카페In</h1>
+                    <img src={logo} alt="intro" /><h1>CAFE-in</h1>
                 </Logoarea>
-                <Actionsarea onClick={logoutHandler}><div className='user-info-div'><FaUserCircle/><span>{userNickname}</span></div></Actionsarea>
+                <Actionsarea onClick={logoutHandler}>
+                    <div className='user-info-div'><FaUserCircle/>
+                        <span>{userNickname}</span>
+                    </div>
+                    <button>LOGOUT</button>
+                </Actionsarea>
             </HeaderContents>
         </HeaderWrapper>
     )
@@ -43,16 +49,12 @@ const HeaderWrapper = styled.div`
     left:0;
     width:100%;
     height:50px;
-    // border-bottom:2px solid lightgray;
     border-bottom : 1px solid lightgray;
-
     background:#FEFEFE;
-    
 `
 
 const HeaderContents = styled.div`
     display:flex;
-    /* background:blue; */
     justify-content: space-between;
     width:95%;
     height:100%;
@@ -67,6 +69,7 @@ const HeaderContents = styled.div`
         margin:0;
         padding:0;
         color:#8AAAE5;
+        font-family: 'JGaegujaengyi-Bold-KO';
     }
 
 `
@@ -74,14 +77,17 @@ const HeaderContents = styled.div`
 const Logoarea = styled.div`
     display:flex;
     cursor: pointer;
+    h1 {
+        margin-top : 11px;
+    }
 
 `
 
 const Actionsarea = styled.div`
     display:flex;
-    flex-direction:column;
+    flex-direction: row;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     font-size:18px;
     width:200px;
     height:100%;
@@ -94,5 +100,19 @@ const Actionsarea = styled.div`
     }
     span {
         font-size:13px;
+    }
+    button {
+        font-size:18px;
+        margin-left : 30px;
+        border : none;
+        background-color : transparent;
+        padding : 0;
+        cursor:pointer;
+
+        @media (min-width: 500px) {
+            &:hover {
+                color: #8AAAE5;
+            }
+          }
     }
 `

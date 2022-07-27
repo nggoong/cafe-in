@@ -119,7 +119,7 @@ const PostingInput = ({ isEdit }) => {
                 <input type="file" accept='image/*' onChange={setThumbnail} 
                 name="file" id="image-file" style={{display:'none'}}></input>
                 <select name="cafe" onChange={selectCafeName} ref={cafeSelectRef}>
-                    <option value="">카페선택</option>
+                    <option value="">☕카페선택</option>
                     <option value="스타벅스">스타벅스</option>
                     <option value="탐앤탐스">탐앤탐스</option>
                     <option value="투썸플레이스">투썸플레이스</option>
@@ -130,8 +130,8 @@ const PostingInput = ({ isEdit }) => {
                 <textarea placeholder='내용을 입력해주세요' name="postingText"
                 ref={textAreaRef}></textarea>
                 <ButtonArea>
-                <Button color="primary" type="submit">확인</Button>
-                <Button color="error" onClick={() => navigate(-1)}>취소</Button>
+                <Button color="error" onClick={() => navigate(-1)}>돌아가기</Button>
+                <Button color="primary" type="submit">등록하기</Button>
             </ButtonArea>
                 
             </InputsArea>
@@ -149,7 +149,6 @@ const InputWrapper = styled.div`
     width:100%;
     height:80vh;
     padding-top:30px;
-    /* background:yellow; */
 `
 const PostingImageDiv = styled.div`
     position:relative;
@@ -161,7 +160,8 @@ const PostingImageDiv = styled.div`
     height:35vh;
     background:blue;
     border-radius:10px;
-    background:lightgray;
+    background: #FEFEFE;
+    border : 1px solid black;
     user-select:none;
 `
 
@@ -178,7 +178,7 @@ const PostingImageRender = styled.div`
 
 const ImageInputLabel = styled.label`
     padding: 6px 25px;
-    background-color:rgb(36, 114, 209);
+    background-color:#8AAAE5;
     border-radius: 4px;
     color: white;
     cursor: pointer;
@@ -203,26 +203,35 @@ const InputsArea = styled.form`
         height:20vh;
         border-radius:10px;
         padding:10px;
-        font-size:20px;
+        font-size:15px;
     }
 
     select {
-        height:30px;
+        height:35px;
+        font-family: 'Noto Sans KR', sans-serif;
     }
+
+    select option {
+        font-size : 13px;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
 `
 const ButtonArea = styled.div`
     display:flex;
     justify-content:center;
     width:100%;
-    gap:20px;
+    gap:4rem;
 `
 
 const Button = styled.button`
-    border-radius:10px;
-    height:50px;
-    width:100px;
-    background:${props => props.color==="primary"? "rgb(36, 114, 209)":"rgb(230, 68, 53)"};
-    color:white;
+    border-radius:50px;
+    height:70px;
+    width:70px;
+    color:${props => props.color==="primary"? "#8AAAE5;":"#555;"};
+    border : none;
+    background-color:white;
     cursor:pointer;
-    font-weight:bold;
+    font-size : 18px;
+
 `
