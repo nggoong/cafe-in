@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../shared/axios";
+import axios from 'axios';
 import { loadingActions } from "./loadingReducer";
 
 const initialState = {
@@ -35,7 +36,12 @@ const initialState = {
 export const fetchPostingsFirst = createAsyncThunk('posting/fetchPostingFirst', async (_, {dispatch}) => {
     dispatch(loadingActions.setTrueLoading());
     dispatch(postingActions.setDefaultPosting());
-    const res = await instance.get('/api/posts').catch((e) => console.log(e));
+    // const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts`, {
+    //     headers:{
+    //         "Authorization":`${localStorage.getItem('Authorization')}`
+    //     }
+    // }).catch((e) => console.log(e));
+    const res = await instance.get('/api/posts').catch((e)=>console.log(e));
     const data = res.data.postResponseDto;
     console.log(res);
     dispatch(loadingActions.setFalseLoading());

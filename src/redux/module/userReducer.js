@@ -23,8 +23,9 @@ export const addUser = createAsyncThunk('user/addUser', async (information) => {
 export const loginUser = createAsyncThunk('user/loginUser', async (information) => {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/login`,information.login_data);
         const token = res.headers.authorization;
-        console.log(res);
+        
         localStorage.setItem("Authorization", token);
+
         // if (data.token !== undefined) {
         //     localStorage.setItem("access_token", data.token);
         //     localStorage.setItem(" ", data.nickname);

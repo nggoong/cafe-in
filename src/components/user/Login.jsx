@@ -14,7 +14,7 @@ const Login = () => {
     const email_ref = React.useRef(null);
     const pw_ref = React.useRef(null);
 
-    const submitLogin = () => {
+    const submitLogin = async () => {
         //공란이면 알럿 띄우기
         if (email_ref.current.value === '') {
             alert ('아이디를 입력하세요!')
@@ -27,11 +27,8 @@ const Login = () => {
             password : pw_ref.current.value
         }
 
-        // axios.post("http://localhost:5001/user_data",{login_data}).then((res) => {
-        //     console.log(res);
-        // });
-
-        dispatch(loginUser({login_data : login_data}))
+        await dispatch(loginUser({login_data : login_data}))
+        navigate('/main');
 
         //비밀번호가 틀리면 로그인 페이지 리로드 필요
         try {

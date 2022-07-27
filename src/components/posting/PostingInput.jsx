@@ -1,8 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
+import { storage } from '../../shared/firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { BsFillCameraFill } from 'react-icons/bs';
 import axios from 'axios';
+import instance from '../../shared/axios';
 
 const validation = (image, cafeName, text) => {
     if(!image || !cafeName || !text.current.value) return false;
@@ -44,17 +47,21 @@ const PostingInput = ({ isEdit }) => {
             alert('폼을 다 채워주세요!');
             return;
         }
+        const uploaded_file = await uploadBytes(ref(storage, `images/${imageState.name}`), imageState);
+        const file_url = await getDownloadURL(uploaded_file.ref);
+        console.log(file_url);
         
         
-        const formData = new FormData();
-        formData.append("file", imageState);
+        // const formData = new FormData();
+        // formData.append("file", imageState);
     
-        const res =  await axios.post(`${process.env.REACT_APP_API_URL}/api/post/?cafeName=${cafeState}&content=${textAreaRef.current.value}`, formData, {
-            headers:{"Content-Type": "multipart/form-data"}
-        }).catch((e) => console.log(e));
+        // const res =  await axios.post(`${process.env.REACT_APP_API_URL}/api/post/?cafeName=${cafeState}&content=${textAreaRef.current.value}`, formData, {
+        //     headers:{"Content-Type": "multipart/form-data",
+        // "Authorization":`${localStorage.getItem("Authorization")}`}
+        // }).catch((e) => console.log(e));
 
-        console.log(res);
-        navigate('/main') // 로그인 기능 반영되고 난 뒤에는 /으로 연결하기
+        // console.log(res);
+        // navigate('/main') // 로그인 기능 반영되고 난 뒤에는 /으로 연결하기
 
     }
 
