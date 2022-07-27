@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import instance from '../../shared/axios';
+import axios from 'axios';
+
 
 import { createUser as loginUser } from '../../redux/module/userReducer';
 import { useDispatch } from 'react-redux';

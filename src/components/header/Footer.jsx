@@ -1,10 +1,17 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { BsPencil, BsBookmarks, BsInboxes } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Footer = () => {
     const wrapperRef = useRef(null);
+    const location = useLocation();
+
+    // useEffect(()=> {
+    //     if(location === '/' || location === '/login' || location === '/signup') {
+    //         wrapperRef.current.style.display='none';
+    //     }
+    // }, [location])
 
     if (window.location.pathname === '/')  return null;
     else if (window.location.pathname === '/login')  return null;

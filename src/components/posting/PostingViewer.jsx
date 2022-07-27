@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postingActions, fetchPostingsFirst, fetchPersonalPostingsFirst, fetchBookmarkPostingsFirst } from '../../redux/module/postingReducer';
 
 const PostingViewer = ({ isPersonal, target }) => {
-    // console.log('hello');
     const dispatch = useDispatch();
     const postingData = useSelector(state => state.posting.postings);
 

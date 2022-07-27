@@ -1,15 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BsFillCameraFill } from 'react-icons/bs';
-import instance from '../../shared/axios'
+import axios from 'axios';
 
-const PostingInput = () => {
+const validation = (image, cafeName, text) => {
+    if(!image || !cafeName || !text.current.value) return false;
+    return true;
+}
+
+const PostingInput = ({ isEdit }) => {
     const textAreaRef = useRef(null);
     const imageDivRef = useRef(null);
+    const cafeSelectRef = useRef(null);
     const [imageState, setImageState] = useState(null);
     const [cafeState, setCafeState] = useState(null);
+    const [originData, setOriginData] = useState({});
     const navigate = useNavigate();
+    const params = useParams();
 
     const setThumbnail = (e) => {
         let files = e.target.files;
@@ -29,21 +37,43 @@ const PostingInput = () => {
         setCafeState(e.target.value);
     }
 
-    const submitHandler = () => {
-        // id가 user_email인지?
-        // user의 nickname도 있으면 좋을거같은데,,,
-        let formData = new FormData();
-        formData.append("data", {cafe_name:cafeState, content:textAreaRef.current.value});
-        formData.append("img", imageState);
-        console.log(formData);
-        // const new_data = {
-        //     cafe_name:cafeState,
-        //     content:textAreaRef.current.value,
-        //     img:imageState,
-        // }
-        // instance.post('/api/post', formData);
-        navigate('/mypage');
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        const isOkay = validation(imageState, cafeState, textAreaRef);
+        if(!isOkay) {
+            alert('폼을 다 채워주세요!');
+            return;
+        }
+        
+        
+        const formData = new FormData();
+        formData.append("file", imageState);
+    
+        const res =  await axios.post(`${process.env.REACT_APP_API_URL}/api/post/?cafeName=${cafeState}&content=${textAreaRef.current.value}`, formData, {
+            headers:{"Content-Type": "multipart/form-data"}
+        }).catch((e) => console.log(e));
+
+        console.log(res);
+        navigate('/main') // 로그인 기능 반영되고 난 뒤에는 /으로 연결하기
+
     }
+
+    useEffect(()=> {
+        if(isEdit) {
+            const posting_id = params.postingId;
+            // 게시글 아이디 이용해서 하나의 게시글을 받아오는 로직 구현해서 state에 넣기.....? 
+            // const res = axios. ...
+            // const data = res.data
+            // setOriginData(data);
+            // imageDivRef.current.style.backgroundImage = `url(${originData?.filePath})`;
+            // cafeSelectRef.current.value = originData?.cafeName;
+            // textAreaRef.current.value = originData?.content;
+
+            // originData에 옵셔널 체이닝 사용하기
+
+        }
+        else return;
+    }, [isEdit])
 
     
 
@@ -54,13 +84,13 @@ const PostingInput = () => {
                 <h2>No Image</h2>
                 <PostingImageRender ref={imageDivRef}/>
             </PostingImageDiv>
-            <InputsArea>
+            <InputsArea onSubmit={submitHandler} >
                 <ImageInputLabel htmlFor="image-file">
                     <p><BsFillCameraFill/>이미지 업로드</p>
                 </ImageInputLabel>
-                <input type="file" onChange={setThumbnail} 
+                <input type="file" accept='image/*' onChange={setThumbnail} 
                 name="file" id="image-file" style={{display:'none'}}></input>
-                <select name="cafe" onChange={selectCafeName}>
+                <select name="cafe" onChange={selectCafeName} ref={cafeSelectRef}>
                     <option value="">카페선택</option>
                     <option value="스타벅스">스타벅스</option>
                     <option value="탐앤탐스">탐앤탐스</option>
@@ -71,12 +101,13 @@ const PostingInput = () => {
                 </select>
                 <textarea placeholder='내용을 입력해주세요' name="postingText"
                 ref={textAreaRef}></textarea>
-                
-            </InputsArea>
-            <ButtonArea>
-                <Button color="primary" onClick={submitHandler}>확인</Button>
+                <ButtonArea>
+                <Button color="primary" type="submit">확인</Button>
                 <Button color="error" onClick={() => navigate(-1)}>취소</Button>
             </ButtonArea>
+                
+            </InputsArea>
+            
         </InputWrapper>
     )
 }
@@ -134,7 +165,7 @@ const ImageInputLabel = styled.label`
     }
 `
 
-const InputsArea = styled.div`
+const InputsArea = styled.form`
     display:flex;
     flex-direction:column;
     gap:10px;

@@ -21,12 +21,13 @@ function App() {
       <Contents>
           <Routes>
             <Route path="/" element={<Intro />}/>
-            <Route path="/main" element={<PostingViewer isPersonal={false} target={'main'}/>}/>
+            <Route path="/main" element={<PostingViewer isPersonal={false} target={'main'}/>}/> {/*로그인 반영 뒤에는 '/'으로 조건부 렌더링*/ } 
             <Route path="/login" element={<Login />}/>
             <Route path="/signup" element={<SignUp />}/>
-            <Route path="/posting/add" element={<PostingInput/>}/>
+            <Route path="/posting/add" element={<PostingInput isEdit={false}/>}/>
             <Route path="/mypage" element={<PostingViewer isPersonal={true} target={'mypage'}/>}/>
             <Route path="/bookmark" element={<PostingViewer isPersonal={false} target={'bookmark'}/> }/>
+            <Route path="/posting/edit/:postingId" element={<PostingInput isEdit={true}/>}/>
         </Routes>
         <Footer></Footer>
       </Contents>

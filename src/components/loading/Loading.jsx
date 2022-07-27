@@ -6,8 +6,9 @@ const Loading = () => {
     const is_loading = useSelector(state => state.loading.isLoading);
     return(
         <LoadingWrapper isShow={is_loading===false? false : true}>
-            {/* <img src='/Spinner-0.6s-200px.gif'></img> */}
-            <Spinner/>
+            <LoadingImageDiv>
+                <img src="/loading.png"></img>
+            </LoadingImageDiv>
         </LoadingWrapper>
     )
 }
@@ -28,23 +29,23 @@ const LoadingWrapper = styled.div`
     
 `
 
-
-const rotation = keyframes`
+const opacityAnimation = keyframes`
     from {
-        transform: rotate(0deg);
+        opacity:1
     }
     to {
-        transform: rotate(360deg);
+        opacity:0.3;
     }
 `;
 
-const Spinner = styled.div`
-  height: 3rem;
-  width: 3rem;
-  border: 5px solid #3563e9;
-  border-radius: 50%;
-  border-left: none;
-  border-right: none;
-  margin: 10rem auto;
-  animation: ${rotation} 1s linear infinite;
-`;
+const LoadingImageDiv = styled.div`
+    width:200px;
+    height:200px;
+    img {
+        height:100%;
+        width:100%;
+    }
+    animation:${opacityAnimation} 1s linear alternate infinite;
+`
+
+
