@@ -33,10 +33,10 @@ const PostingCard = ({ isPersonal, posting }) => {
     return(
         <PostingCardWrapper>
             <PostingHeader>
-                <h2>{posting.nickname}</h2>
-                <p>{createAtcut(posting.created_at)}</p>
+                <h2>{posting.nickName}</h2>
+                <p>{createAtcut(posting.createdAt)}</p>
             </PostingHeader>
-            <PostingImageDiv style={{backgroundImage:`url(${posting.filePath})`}}>
+            <PostingImageDiv style={{backgroundImage:`url(${posting.imageUrl})`}}>
             </PostingImageDiv>
             <ActionsArea personal={isPersonal}>
                 <p onClick={toggleBookmark}>{!bookmark?<BsBookmark/>:<BsBookmarkFill style={{color:'yellow'}}/>}</p>

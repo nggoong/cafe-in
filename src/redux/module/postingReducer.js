@@ -42,7 +42,7 @@ export const fetchPostingsFirst = createAsyncThunk('posting/fetchPostingFirst', 
     //     }
     // }).catch((e) => console.log(e));
     const res = await instance.get('/api/posts').catch((e)=>console.log(e));
-    const data = res.data.postResponseDto;
+    const data = res.data;
     console.log(res);
     dispatch(loadingActions.setFalseLoading());
 

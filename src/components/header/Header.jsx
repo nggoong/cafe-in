@@ -3,25 +3,33 @@ import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import logo from '../image/logo.png';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import instance from '../../shared/axios';
 
 const Header = () => {
 
     const navigate = useNavigate();
     //로고 눌러서 다른 페이지 이동시 헤더 노출 현상 방지 위해 Link에서 navigate로 변경
+    const userNickname = useSelector(state => state.user.nickname);
+    const logoutHandler = async () => {
+        const res = await instance.get(`/user/logout`);
+        console.log(res.data);
+    }
 
-    if (window.location.pathname === '/')  return null;
+    if (window.location.pathname === '/' && !userNickname)  return null;
     if (window.location.pathname === '/login')  return null;
     if (window.location.pathname === '/signup')  return null;
+
 
     return (
         <HeaderWrapper>
             <HeaderContents>
             <Logoarea onClick={() => {
-                        navigate("/main");
+                        navigate("/");
                     }}>
                     <img src={logo} alt="intro" /><h1>카페In</h1>
                 </Logoarea>
-                <Actionsarea><div className='user-info-div'><FaUserCircle/><span>nickname</span></div></Actionsarea>
+                <Actionsarea onClick={logoutHandler}><div className='user-info-div'><FaUserCircle/><span>{userNickname}</span></div></Actionsarea>
             </HeaderContents>
         </HeaderWrapper>
     )

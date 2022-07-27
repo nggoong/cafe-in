@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
 import Login from './components/user/Login';
 import SignUp from './components/user/SignUp';
@@ -13,6 +14,9 @@ import Loading from './components/loading/Loading'
 
 
 function App() {
+  const userNickname = useSelector(state => state.user.nickname);
+  console.log(userNickname);
+
   return (
     <div className="App">
       <GlobalStyle/>
@@ -20,8 +24,8 @@ function App() {
       <Header></Header>
       <Contents>
           <Routes>
-            <Route path="/" element={<Intro />}/>
-            <Route path="/main" element={<PostingViewer isPersonal={false} target={'main'}/>}/> {/*로그인 반영 뒤에는 '/'으로 조건부 렌더링*/ } 
+            <Route path="/" element={!userNickname?<Intro />:<PostingViewer isPersonal={false} target={'main'}/>}/>
+            {/* <Route path="/main" element={<PostingViewer isPersonal={false} target={'main'}/>}/> 로그인 반영 뒤에는 '/'으로 조건부 렌더링*/ } 
             <Route path="/login" element={<Login />}/>
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/posting/add" element={<PostingInput isEdit={false}/>}/>

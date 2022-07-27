@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
+import instance from "../../shared/axios";
 //User data를 관리하는 리덕스를 툴킷을 사용하여 덕스 구조로 만들자!
 
 
@@ -20,11 +21,15 @@ export const addUser = createAsyncThunk('user/addUser', async (information) => {
 
 
 //로그인
-export const loginUser = createAsyncThunk('user/loginUser', async (information) => {
+export const loginUser = createAsyncThunk('user/loginUser', async (information, { dispatch }) => {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/login`,information.login_data);
         const token = res.headers.authorization;
         
         localStorage.setItem("Authorization", token);
+        
+        const getUserResult = await instance.post('/user/info');
+        const userdata = getUserResult.data;
+        dispatch(userActions.createUser(userdata));
 
         // if (data.token !== undefined) {
         //     localStorage.setItem("access_token", data.token);
@@ -44,10 +49,9 @@ const userSlice = createSlice({
         nickname : "",
     },
     reducers : {
-        createUser : (state,action) => {
-            state.email = action.email;
-            state.nickname = action.nickname;
-            state.password = action.password;
+        createUser : (state, action) => {
+            state.email = action.payload.email;
+            state.nickname = action.payload.nickname;
         },
 
         // loginUser : (state,action) => {

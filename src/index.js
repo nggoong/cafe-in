@@ -5,24 +5,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
+import { userActions } from './redux/module/userReducer';
 import instance from './shared/axios';
 import store from './redux/configStore';
 
-const loadingLoginInfo = () => {
+const loadingLoginInfo = async () => {
   try {
-    const userInfo = localStorage.getItem('access_token');
+    const userInfo = localStorage.getItem('Authorization');
     if(!userInfo) return;
     else {
-      // const res = instance.get('') // 토큰 하나 보내주면 유저 정보 받아오는 api 이용해서 로그인 정보 받아오기
-      // const data = res.data;
-      // store.dispatch(setUserInfo({email:data.email, nickname:data.user_nickname}))  // 로그인 정보 넣어주는 리덕스 액션 생성 함수 실행 
+      const res = await instance.post('/user/info');
+      const data = res.data;
+      store.dispatch(userActions.createUser(data));
     }
   }
   catch(e) {
     console.log('web storage error!!');
-  }
-  finally {
-    console.log('reload됨');
   }
 }
 

@@ -22,10 +22,14 @@ const PostingInput = ({ isEdit }) => {
     const navigate = useNavigate();
     const params = useParams();
 
-    const setThumbnail = (e) => {
+    const setThumbnail = async (e) => {
         let files = e.target.files;
+        
         if(files && files[0]) {
-            setImageState(files[0]);
+            const uploaded_file = await uploadBytes(ref(storage, `images/${files[0].name}`), files[0]);
+            const file_url = await getDownloadURL(uploaded_file.ref);
+            console.log(file_url);
+            setImageState(file_url);
         }
         let reader = new FileReader();
         
@@ -47,9 +51,21 @@ const PostingInput = ({ isEdit }) => {
             alert('폼을 다 채워주세요!');
             return;
         }
-        const uploaded_file = await uploadBytes(ref(storage, `images/${imageState.name}`), imageState);
-        const file_url = await getDownloadURL(uploaded_file.ref);
-        console.log(file_url);
+        if(!isEdit) {
+            const uploaded_file = await uploadBytes(ref(storage, `images/${imageState.name}`), imageState);
+            const file_url = await getDownloadURL(uploaded_file.ref);
+            console.log(file_url);
+            let new_data = {
+                cafeName:cafeState,
+                content:textAreaRef.current.value,
+                imageUrl:imageState
+            }
+            await instance.post('/api/post', new_data).catch((e) => console.log(e));
+        }
+        else {
+
+        }
+        
         
         
         // const formData = new FormData();
@@ -76,11 +92,16 @@ const PostingInput = ({ isEdit }) => {
             // cafeSelectRef.current.value = originData?.cafeName;
             // textAreaRef.current.value = originData?.content;
 
+            // setImageState(data.filePath);
+            // setCafeState(data.cafeName);
+            // textAreaRef.current.value = data.content;
+
             // originData에 옵셔널 체이닝 사용하기
 
         }
         else return;
     }, [isEdit])
+
 
     
 

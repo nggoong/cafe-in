@@ -2,19 +2,15 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { BsPencil, BsBookmarks, BsInboxes } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
     const wrapperRef = useRef(null);
     const location = useLocation();
+    const userNickname = useSelector(state => state.user.nickname);
 
-    // useEffect(()=> {
-    //     if(location === '/' || location === '/login' || location === '/signup') {
-    //         wrapperRef.current.style.display='none';
-    //     }
-    // }, [location])
-
-    if (window.location.pathname === '/')  return null;
-    else if (window.location.pathname === '/login')  return null;
+    if (window.location.pathname === '/' && !userNickname)  return null;
+    if (window.location.pathname === '/login')  return null;
     else if (window.location.pathname === '/signup')  return null;
 
     
