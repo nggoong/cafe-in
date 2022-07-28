@@ -30,7 +30,7 @@ const Header = () => {
                     }}>
                     <img src={logo} alt="intro" /><h1>CAFE-in</h1>
                 </Logoarea>
-                <Actionsarea onClick={logoutHandler}>
+                <Actionsarea>
                     <div className='user-info-div'><FaUserCircle/>
                         <span>{userNickname}</span>
                     </div>
