@@ -70,19 +70,6 @@ const PostingInput = ({ isEdit }) => {
             navigate('/mypage');
 
         }
-        
-        
-        
-        // const formData = new FormData();
-        // formData.append("file", imageState);
-    
-        // const res =  await axios.post(`${process.env.REACT_APP_API_URL}/api/post/?cafeName=${cafeState}&content=${textAreaRef.current.value}`, formData, {
-        //     headers:{"Content-Type": "multipart/form-data",
-        // "Authorization":`${localStorage.getItem("Authorization")}`}
-        // }).catch((e) => console.log(e));
-
-        // console.log(res);
-        // navigate('/main') // 로그인 기능 반영되고 난 뒤에는 /으로 연결하기
 
     }
 

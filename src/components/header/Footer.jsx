@@ -44,7 +44,7 @@ const Footer = () => {
 }
 
 
-//   BsFillPencilFill, BsBookmarksFill, BsInboxesFill
+
 export default Footer;
 
 const FooterWrapper = styled.div`

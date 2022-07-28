@@ -32,43 +32,7 @@ export const fetchPostingsFirst = createAsyncThunk('posting/fetchPostingFirst', 
     
 })
 
-// export const fetchPostingsFirst = createAsyncThunk('posting/fetchPostingFirst', async (_, {dispatch}) => {
-//     dispatch(loadingActions.setTrueLoading());
-//     dispatch(postingActions.setDefaultPosting());
-//     // const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/posts`, {
-//     //     headers:{
-//     //         "Authorization":`${localStorage.getItem('Authorization')}`
-//     //     }
-//     // }).catch((e) => console.log(e));
-//     const res = await instance.get('/api/posts').catch((e)=>console.log(e));
-//     const data = res.data;
-//     console.log(res);
-//     dispatch(loadingActions.setFalseLoading());
 
-//     return data; 
-// })
-
-// export const fetchPersonalPostingsFirst = createAsyncThunk('posting/fetchPostingFirst', async (_, { dispatch }) => {
-//     dispatch(loadingActions.setTrueLoading());
-//     dispatch(postingActions.setDefaultPosting());
-//     const res = await instance.get('/api/post/myposts').catch((e)=> console.log(e));
-//     const data = res.data;
-//     console.log(data);
-//     dispatch(loadingActions.setFalseLoading());
-
-//     return data;
-// })
-
-// export const fetchBookmarkPostingsFirst = createAsyncThunk('posting/fetchBookmarkFirst', async (_, { dispatch }) => {
-//     dispatch(loadingActions.setTrueLoading());
-//     dispatch(postingActions.setDefaultPosting());
-//     const res = await instance.get('/api/bookmark/').catch((e)=> console.log(e));
-//     const data = res.data;
-//     console.log(data);
-//     dispatch(loadingActions.setFalseLoading());
-
-//     return data;
-// })
 
 export const deletePersonalPosting = createAsyncThunk('posting/deletePersonalPostings', async (information, { dispatch }) => {
     const { postId } = information;
@@ -78,9 +42,6 @@ export const deletePersonalPosting = createAsyncThunk('posting/deletePersonalPos
     dispatch(loadingActions.setFalseLoading());
 })
 
-// export const addPosting = createAsyncThunk('posting/addPosting', async(information, { dispatch }) => {
-
-// })
 
 
 const postingSlice = createSlice({
@@ -95,12 +56,6 @@ const postingSlice = createSlice({
         [fetchPostingsFirst.fulfilled.type]: (state, action) => {
             state.postings = action.payload;
         },
-        // [fetchPersonalPostingsFirst.fulfilled.type]: (state, action) => {
-        //     state.postings = action.payload;
-        // },
-        // [fetchBookmarkPostingsFirst.fulfilled.type]: (state, action)=> {
-        //     state.postings = action.payload;
-        // }
     }
 })
 

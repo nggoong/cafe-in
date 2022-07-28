@@ -11,24 +11,11 @@ const PostingViewer = ({ isPersonal, target }) => {
 
     useEffect(()=> {
         dispatch(fetchPostingsFirst({target:target}))
-        // if(target === 'main') {
-        //     dispatch(fetchPostingsFirst());
-        // }
-        // else if(target === 'mypage') {
-        //     dispatch(fetchPersonalPostingsFirst());
-        // }
-        // else if(target === 'bookmark') {
-        //     dispatch(fetchBookmarkPostingsFirst());
-        // }
     }, [target])
 
     if(!postingData.length) {
         return <NoData></NoData>
     }
-
-    // useEffect(()=> {
-    //     console.log(postingData);
-    // }, [postingData])
 
     return(
         <PostingViewerWrapper>
