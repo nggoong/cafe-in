@@ -48,6 +48,7 @@ const IntroWrapper =styled.div`
     width : 120px;
     font-size : 15px;
     border-radius : 3px;
+    cursor: pointer;
 
     :active {
         transform : translateY(3px);

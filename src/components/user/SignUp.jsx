@@ -207,6 +207,7 @@ const SignupBox =styled.div`
         background-color: #555;
         color : white;
         font-size : 15px;
+        cursor: pointer;
 
         :active {
             transform : translateY(3px);
