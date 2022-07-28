@@ -58,7 +58,7 @@ const HeaderContents = styled.div`
     justify-content: space-between;
     width:95%;
     height:100%;
-    max-width:800px;
+    max-width:500px;
     margin:0 auto;
     margin-top : 3px;
 
@@ -86,7 +86,7 @@ const Logoarea = styled.div`
 const Actionsarea = styled.div`
     display:flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     font-size:18px;
     width:200px;

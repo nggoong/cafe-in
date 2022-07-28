@@ -11,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import PostingViewer from './components/posting/PostingViewer';
 import PostingInput from './components/posting/PostingInput';
 import Loading from './components/loading/Loading'
+import NoData from './components/posting/NoData';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <div className="App">
       <GlobalStyle/>
       <Loading/>
+      {/* <NoData/> */}
       <Header></Header>
       <Contents>
           <Routes>
@@ -44,7 +46,7 @@ export default App;
 
 const Contents =styled.div`
   width:90%;
-  max-width:800px;
+  max-width:500px;
   padding-top:60px;
   margin:0 auto;
   padding-bottom:50px;

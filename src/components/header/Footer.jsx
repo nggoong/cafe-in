@@ -64,7 +64,7 @@ const FooterContents = styled.div`
     background: white;
     width:70vw;
     height:100%;
-    max-width:800px;
+    max-width:500px;
     margin:0 auto;
     padding-top: 5px;
 

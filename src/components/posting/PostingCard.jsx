@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import instance from '../../shared/axios';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill, BsSuitHeart, BsFillSuitHeartFill } from 'react-icons/bs';
@@ -12,22 +13,35 @@ const createAtcut = (created_at) => {
 
 const PostingCard = ({ isPersonal, posting }) => {
     // 북마크 부분 백앤드에서 어떻게 줄지 모르니까 나중에 바꾸기 꼭.
-    const [bookmark, setBookmark] = useState(()=>(posting.bookmark === true?true:false));
+    const [bookmark, setBookmark] = useState(()=>(posting.bookMark === true?true:false));
     const [like, setLike] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const toggleBookmark = () => {
+    const toggleBookmark = async () => {
+        if(!bookmark) {
+            await instance.get(`/api/bookmark/${posting.id}`);
+        }
+        else {
+            await instance.delete(`/api/bookmark/${posting.id}`);
+        }
         setBookmark((bookmark)=> !bookmark);
     }
-    const toggleLike = () => {
-        setLike((like) => !like);
-    }
+    // const toggleLike = () => {
+    //     setLike((like) => !like);
+    // }
 
 
     const deleteHandler = async () => {
-        await dispatch(deletePersonalPosting({id:posting.id}));
-        window.location.replace('/mypage');
+        const result = window.confirm('정말 삭제하시겠습니까?');
+        if(!result) return; 
+        try {
+            await dispatch(deletePersonalPosting({postId:posting.id}));
+            window.location.replace('/mypage');
+        }
+        catch(e) {
+            alert('삭제에 실패하였습니다.');
+        }
     }
 
     return(
@@ -40,7 +54,7 @@ const PostingCard = ({ isPersonal, posting }) => {
             </PostingImageDiv>
             <ActionsArea personal={isPersonal}>
                 <p onClick={toggleBookmark}>{!bookmark?<BsBookmark/>:<BsBookmarkFill style={{color:'yellow'}}/>}</p>
-                <p onClick={toggleLike}>{!like?<BsSuitHeart/>:<BsFillSuitHeartFill style={{color:'red'}}/>}</p>
+                {/* <p onClick={toggleLike}>{!like?<BsSuitHeart/>:<BsFillSuitHeartFill style={{color:'red'}}/>}</p> */}
             </ActionsArea>
             <PostingContent>
                 <h2>{posting.cafeName}</h2>
@@ -49,7 +63,7 @@ const PostingCard = ({ isPersonal, posting }) => {
             
             <PersonalArea personal={isPersonal}>
                 <p className='delete-action' onClick={deleteHandler}>DELETE</p>
-                <p className='edit-action'>EDIT</p>
+                <p className='edit-action' onClick={()=> navigate(`/posting/edit/${posting.id}`)}>EDIT</p>
             </PersonalArea>
         </PostingCardWrapper>
     )

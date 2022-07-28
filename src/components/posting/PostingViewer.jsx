@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PostingCard from './PostingCard';
 import { useDispatch, useSelector } from 'react-redux';
+import NoData from './NoData';
 import { postingActions, fetchPostingsFirst, fetchPersonalPostingsFirst, fetchBookmarkPostingsFirst } from '../../redux/module/postingReducer';
 
 const PostingViewer = ({ isPersonal, target }) => {
@@ -9,16 +10,21 @@ const PostingViewer = ({ isPersonal, target }) => {
     const postingData = useSelector(state => state.posting.postings);
 
     useEffect(()=> {
-        if(target === 'main') {
-            dispatch(fetchPostingsFirst());
-        }
-        else if(target === 'mypage') {
-            dispatch(fetchPersonalPostingsFirst());
-        }
-        else if(target === 'bookmark') {
-            dispatch(fetchBookmarkPostingsFirst());
-        }
+        dispatch(fetchPostingsFirst({target:target}))
+        // if(target === 'main') {
+        //     dispatch(fetchPostingsFirst());
+        // }
+        // else if(target === 'mypage') {
+        //     dispatch(fetchPersonalPostingsFirst());
+        // }
+        // else if(target === 'bookmark') {
+        //     dispatch(fetchBookmarkPostingsFirst());
+        // }
     }, [target])
+
+    if(!postingData.length) {
+        return <NoData></NoData>
+    }
 
     // useEffect(()=> {
     //     console.log(postingData);

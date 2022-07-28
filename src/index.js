@@ -20,6 +20,7 @@ const loadingLoginInfo = async () => {
     }
   }
   catch(e) {
+    localStorage.removeItem('Authorization');
     console.log('web storage error!!');
   }
 }

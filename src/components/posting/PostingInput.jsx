@@ -18,7 +18,6 @@ const PostingInput = ({ isEdit }) => {
     const cafeSelectRef = useRef(null);
     const [imageState, setImageState] = useState(null);
     const [cafeState, setCafeState] = useState(null);
-    const [originData, setOriginData] = useState({});
     const navigate = useNavigate();
     const params = useParams();
 
@@ -45,24 +44,30 @@ const PostingInput = ({ isEdit }) => {
     }
 
     const submitHandler = async (e) => {
+        console.log(e.target)
         e.preventDefault();
         const isOkay = validation(imageState, cafeState, textAreaRef);
         if(!isOkay) {
             alert('폼을 다 채워주세요!');
             return;
         }
-        if(!isEdit) {
-            const uploaded_file = await uploadBytes(ref(storage, `images/${imageState.name}`), imageState);
-            const file_url = await getDownloadURL(uploaded_file.ref);
-            console.log(file_url);
-            let new_data = {
+        let new_data = {
                 cafeName:cafeState,
                 content:textAreaRef.current.value,
                 imageUrl:imageState
             }
+        // 게시글 추가 기능
+        if(!isEdit) {
+            const uploaded_file = await uploadBytes(ref(storage, `images/${imageState.name}`), imageState);
+            const file_url = await getDownloadURL(uploaded_file.ref);
+            console.log(file_url);
             await instance.post('/api/post', new_data).catch((e) => console.log(e));
+            navigate('/');
         }
+        // 게시글 수정 기능
         else {
+            await instance.put(`/api/post/${params.postingId}`, new_data);
+            navigate('/mypage');
 
         }
         
@@ -83,21 +88,18 @@ const PostingInput = ({ isEdit }) => {
 
     useEffect(()=> {
         if(isEdit) {
-            const posting_id = params.postingId;
-            // 게시글 아이디 이용해서 하나의 게시글을 받아오는 로직 구현해서 state에 넣기.....? 
-            // const res = axios. ...
-            // const data = res.data
-            // setOriginData(data);
-            // imageDivRef.current.style.backgroundImage = `url(${originData?.filePath})`;
-            // cafeSelectRef.current.value = originData?.cafeName;
-            // textAreaRef.current.value = originData?.content;
+            const fetchOnePost = async () => {
+                const postId = params.postingId;
+                const res = await instance.get(`/api/post/${postId}`);
+                const data = res.data;
+                imageDivRef.current.style.backgroundImage = `url(${data.imageUrl})`;
+                cafeSelectRef.current.value = data.cafeName;
+                textAreaRef.current.value = data.content;
+                setImageState(data.imageUrl);
+                setCafeState(data.cafeName);
+            }
 
-            // setImageState(data.filePath);
-            // setCafeState(data.cafeName);
-            // textAreaRef.current.value = data.content;
-
-            // originData에 옵셔널 체이닝 사용하기
-
+            fetchOnePost().catch(console.error);
         }
         else return;
     }, [isEdit])
@@ -112,7 +114,7 @@ const PostingInput = ({ isEdit }) => {
                 <h2>No Image</h2>
                 <PostingImageRender ref={imageDivRef}/>
             </PostingImageDiv>
-            <InputsArea onSubmit={submitHandler} >
+            <InputsArea >
                 <ImageInputLabel htmlFor="image-file">
                     <p><BsFillCameraFill/>이미지 업로드</p>
                 </ImageInputLabel>
@@ -131,7 +133,7 @@ const PostingInput = ({ isEdit }) => {
                 ref={textAreaRef}></textarea>
                 <ButtonArea>
                 <Button color="error" onClick={() => navigate(-1)}>돌아가기</Button>
-                <Button color="primary" type="submit">등록하기</Button>
+                <Button color="primary" type="submit" onClick={submitHandler}>등록하기</Button>
             </ButtonArea>
                 
             </InputsArea>
@@ -193,7 +195,7 @@ const ImageInputLabel = styled.label`
     }
 `
 
-const InputsArea = styled.form`
+const InputsArea = styled.div`
     display:flex;
     flex-direction:column;
     gap:10px;
