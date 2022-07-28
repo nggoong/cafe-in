@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import instance from '../../shared/axios';
 
 const Header = () => {
-
+    let localStorage = window.localStorage;
     const navigate = useNavigate();
     //로고 눌러서 다른 페이지 이동시 헤더 노출 현상 방지 위해 Link에서 navigate로 변경
     const userNickname = useSelector(state => state.user.nickname);
@@ -34,7 +34,11 @@ const Header = () => {
                     <div className='user-info-div'><FaUserCircle/>
                         <span>{userNickname}</span>
                     </div>
-                    <button>LOGOUT</button>
+                    <button onClick={() => {
+                        localStorage.removeItem("Authorization");
+                        window.location.replace('/');
+                    }}
+                    >LOGOUT</button>
                 </Actionsarea>
             </HeaderContents>
         </HeaderWrapper>
