@@ -67,6 +67,7 @@ const Titlearea =styled.div`
 
     span {
         color : #8AAAE5;
+        font-family: 'JGaegujaengyi-Bold-KO';
         -webkit-animation:blink 1s ease-in-out infinite alternate;
         -moz-animation:blink 1s ease-in-out infinite alternate;
         animation:blink 1s ease-in-out infinite alternate;
@@ -105,7 +106,7 @@ const Bodyarea =styled.div`
     }
     p {
         margin : 10px;
-        font-size : 18px;
+        font-size : 15px;
     }
 
     span {

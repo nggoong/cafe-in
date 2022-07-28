@@ -106,7 +106,7 @@ const Actionsarea = styled.div`
         font-size:13px;
     }
     button {
-        font-size:18px;
+        font-size:15px;
         margin-left : 30px;
         border : none;
         background-color : transparent;

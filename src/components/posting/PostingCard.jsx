@@ -118,6 +118,10 @@ const PostingContent = styled.div`
         width:100%;
         line-height:1.5;
     }
+
+    h2 {
+        font-size : 25px;
+    }
 `
 const ActionsArea = styled.div`
     display:${props => props.personal === false? 'flex':'none'};

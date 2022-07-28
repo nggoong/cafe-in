@@ -8,12 +8,12 @@ body {
   
 }
 
-@font-face {
+/* @font-face {
   font-family: 'GangwonEdu_OTFBoldA';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 @font-face {
     font-family: 'JGaegujaengyi-Bold-KO';
@@ -26,6 +26,18 @@ body {
 
 .notosanskr * { 
  font-family: 'Noto Sans KR', sans-serif;
+}
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* { 
+font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* { 
+font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
 }
 
 code {
