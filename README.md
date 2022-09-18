@@ -1,4 +1,6 @@
 # cafe-in
+![image](https://user-images.githubusercontent.com/78852661/190915067-9ef4f7b7-a380-498d-8f84-deaf3104b7c8.png)
+
 
 ## 카페의 커피 커스텀 메뉴 추천 어플리케이션(프론트엔드)
 
